@@ -133,7 +133,8 @@ Cancels an existing order in the Shopify store.
 ```json
 {
   "order_id": 1
-}```
+}
+```
 #### Response
 ```json
 {
