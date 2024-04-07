@@ -26,13 +26,29 @@ This project demonstrates how to integrate Shopify APIs with a Node.js applicati
 4. **Start the server:**
 
 
+
 ## API Endpoints
 
-- GET `/app/api/addresses`: Retrieve list of addresses.
-- PUT `/app/api/address/update`: Update a customer address.
-- GET `/app/api/orders`: Get list of orders.
-- GET `/app/api/order`: Get order details.
-- POST `/app/api/order/cancel`: Cancel an order.
+- **GET `/app/api/addresses`**
+- Retrieves a list of saved addresses for Shopify customers based on their phone numbers.
+
+- **PUT `/app/api/address/update`**
+- Updates a customer's address and sets it as the default address.
+
+- **GET `/app/api/orders`**
+- Fetches the list of orders associated with Shopify customers.
+
+- **GET `/app/api/order`**
+- Retrieves detailed order information including order status and product details.
+
+- **POST `/app/api/orderp`**
+- Creates a new order in the Shopify store.
+
+- **POST `/app/api/customer`**
+- Creates a new customer in the Shopify store.
+
+- **POST `/app/api/order/cancel`**
+- Cancels an existing order in the Shopify store.
 
 ## Project Structure
 
@@ -47,6 +63,10 @@ This project demonstrates how to integrate Shopify APIs with a Node.js applicati
 - express: Web framework for Node.js.
 - body-parser: Middleware for parsing request bodies.
 - shopify-api-node: Shopify API client library for Node.js.
+
+
+
+
 
 
 
