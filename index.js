@@ -22,6 +22,9 @@ const shopify = new Shopify({
 });
 
 
+app.get("/",(req,res)=>{
+  res.send('Hello Shashank')
+})
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
