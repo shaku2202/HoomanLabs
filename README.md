@@ -41,12 +41,6 @@ This project demonstrates how to integrate Shopify APIs with a Node.js applicati
 - **GET `/app/api/order`**
 - Retrieves detailed order information including order status and product details.
 
-- **POST `/app/api/orderp`**
-- Creates a new order in the Shopify store.
-
-- **POST `/app/api/customer`**
-- Creates a new customer in the Shopify store.
-
 - **POST `/app/api/order/cancel`**
 - Cancels an existing order in the Shopify store.
 
