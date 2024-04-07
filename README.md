@@ -4,10 +4,10 @@ This project demonstrates how to integrate Shopify APIs with a Node.js applicati
 
 ## Getting Started
 
-1. **Clone the repository:**
+1. **Clone the repository:https://github.com/shaku2202/HoomanLabs**
 
 
-2. **Install dependencies:**
+2. **Install dependencies:npm i node**
 
 
 3. **Set up Shopify API credentials:**
@@ -32,8 +32,6 @@ This project demonstrates how to integrate Shopify APIs with a Node.js applicati
 - PUT `/app/api/address/update`: Update a customer address.
 - GET `/app/api/orders`: Get list of orders.
 - GET `/app/api/order`: Get order details.
-- POST `/app/api/orderp`: Create a new order.
-- POST `/app/api/customer`: Create a new customer.
 - POST `/app/api/order/cancel`: Cancel an order.
 
 ## Project Structure
