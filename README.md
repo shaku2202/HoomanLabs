@@ -7,7 +7,7 @@ This project demonstrates how to integrate Shopify APIs with a Node.js applicati
 1. **Clone the repository:https://github.com/shaku2202/HoomanLabs**
 
 
-2. **Install dependencies:npm i node**
+2. **Install dependencies:  npm i node**
 
 
 3. **Set up Shopify API credentials:**
