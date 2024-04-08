@@ -4,11 +4,11 @@ const Shopify = require('shopify-api-node');
 const logger = require('../logger');
 require('dotenv').config();
 
-const shopName=process.env.shopName;
-const apiKey=process.env.apiKey;
-const password=process.env.password;
+const shopName = process.env.shopName;
+const apiKey = process.env.apiKey;
+const password = process.env.password;
 
-router.get('/', async (req, res) => {
+const getOrderDetails=async (req, res) => {
   const { orderNumber } = req.query;
 
   if (!orderNumber) {
@@ -18,9 +18,9 @@ router.get('/', async (req, res) => {
 
   try {
     const shopify = new Shopify({
-      shopName: Name,
-      apiKey: key,
-      password: passKey,
+      shopName: shopName,
+      apiKey: apiKey,
+      password: password,
     });
 
     const order = await shopify.order.list({ query: orderNumber });
@@ -39,6 +39,8 @@ router.get('/', async (req, res) => {
     }
     res.status(500).json({ error: 'Internal server error' });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getOrderDetails
+};

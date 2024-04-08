@@ -15,6 +15,7 @@
     "express": "^4.19.2",
     "mongoose": "^8.3.0",
     "node": "^18.20.1",
-    "shopify-api-node": "^3.13.1"
+    "shopify-api-node": "^3.13.1",
+    "winston": "^3.13.0"
   }
 }

@@ -1,32 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const Shopify = require('shopify-api-node');
-const logger = require('../logger');
+const logger = require('../logger'); 
 require('dotenv').config();
 
-const shopName=process.env.shopName;
-const apiKey=process.env.apiKey;
-const password=process.env.password;
+const shopName = process.env.shopName;
+const apiKey = process.env.apiKey;
+const password = process.env.password;
 
-router.get('/', async (req, res) => {
+const getAddressesByPhoneNumber = async (req, res) => {
   const { phoneNumber } = req.query;
 
-  if (!phoneNumber || phoneNumber.length!==10) {
-    logger.error('Phone number is required ');
-    return res.status(400).json({ error: 'Phone number is required or not valid phone number' });
+  if (!phoneNumber || !/^\d{10}$/.test(phoneNumber)) {
+    logger.error('Phone number is required or invalid');
+    return res.status(400).json({ error: 'Phone number is required or not valid' });
   }
+
   try {
     const shopify = new Shopify({
-      shopName: Name,
-      apiKey: key,
-      password: passKey,
+      shopName: shopName,
+      apiKey: apiKey,
+      password: password,
     });
 
     const searchResult = await shopify.customer.search({ query: phoneNumber });
     if (searchResult.length === 0) {
-      return res.status(400).json({ error: 'Not found' });
-
+      logger.info('Customer not found');
+      return res.status(404).json({ error: 'Customer not found' });
     }
+
     const customerId = searchResult[0].id;
     const addresses = await shopify.customerAddress.list(customerId);
 
@@ -34,12 +36,13 @@ router.get('/', async (req, res) => {
     res.json(addresses);
   } catch (error) {
     logger.error(`Error occurred in fetching customer addresses: ${error.message}`);
-    console.error('Error occurred in fetching customer addresses:', error);
     if (error.statusCode === 404) {
-      return res.status(404).json({ error: 'Not found' });
+      return res.status(404).json({ error: 'Customer not found' });
     }
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: 'Internal server error' });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getAddressesByPhoneNumber,
+};
