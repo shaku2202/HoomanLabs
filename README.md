@@ -10,28 +10,30 @@ Backend
 Backend: [https://hoomanlabs-1.onrender.com/](https://hoomanlabs-1.onrender.com/)
 
 ## Directory Structure
+
 HoomansLabs/
 ├─ controllers/
-│ ├─AddressController.js
-│ ├─CancleOrderController.js
-│ ├─OrderController.js
-│ ├─OrdersControllers.js
-│ ├─UpdateAddressController.js
-├─ Middleware
-│ ├─errorHandler.js
-├─ models
-│ ├─Address.js
-│ ├─Order.js
-│ ├─Customers.js
+│  ├─ AddressController.js
+│  ├─ CancleOrderController.js
+│  ├─ OrderController.js
+│  ├─ OrdersControllers.js
+│  ├─ UpdateAddressController.js
+├─ middleware/
+│  ├─ errorHandler.js
+├─ models/
+│  ├─ Address.js
+│  ├─ Order.js
+│  ├─ Customers.js
 ├─ routes/
-│ ├─addressRoutes.js
-│ ├─cancleOrderRoutes.js
-│ ├─orderRoutes.js
-│ ├─ordersRoutes.js
-│ ├─updateAddressRoutes.js
+│  ├─ addressRoutes.js
+│  ├─ cancleOrderRoutes.js
+│  ├─ orderRoutes.js
+│  ├─ ordersRoutes.js
+│  ├─ updateAddressRoutes.js
 ├─ .env
 ├─ index.js
 ├─ README.md
+
 
 
 
