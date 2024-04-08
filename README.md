@@ -7,7 +7,7 @@ This project demonstrates the integration of Shopify APIs with a Node.js backend
 Backend
 
 ## Deployed App
-Backend: [https://your-backend-deployed-site.whatever](https://your-backend-deployed-site.whatever)
+Backend: [https://your-backend-deployed-site.whatever](https://hoomanlabs-1.onrender.com/)
 
 ## Directory Structure
 HoomansLabs/
