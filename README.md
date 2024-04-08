@@ -83,8 +83,6 @@ HoomansLabs/
 - **PUT `/app/api/address/update`:** Updates customer address.
 - **GET `/app/api/orders`:** Gets order list.
 - **GET `/app/api/order`:** Gets order details.
-- **POST `/app/api/orderp`:** Creates new order.
-- **POST `/app/api/customer`:** Creates new customer.
 - **POST `/app/api/order/cancel`:** Cancels order.
 
 
