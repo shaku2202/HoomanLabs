@@ -5,6 +5,7 @@ const addressRoutes = require('./routes/addressRoutes');
 const updateAddressRoutes = require('./routes/updateAddressRoutes');
 const ordersRoutes = require('./routes/ordersRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const errorHandler = require('./middleware/errorHandler');
 // const odeerP=require('./routes/OrdersP');
 // const customerRoutes = require('./routes/customerRoutes');
 const cancelOrderRoutes = require('./routes/cancelOrderRoutes');
@@ -28,6 +29,9 @@ app.get("/",(req,res)=>{
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Error handling middleware
+app.use(errorHandler);
 
 
 // Routes
