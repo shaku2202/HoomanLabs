@@ -1,14 +1,47 @@
-// app/controllers/OrdersController.js
+const express = require('express');
+const router = express.Router();
+const Shopify = require('shopify-api-node');
+const logger = require('../logger');
+require('dotenv').config();
 
-const Order = require('../models/Order');
+const shopName=process.env.shopName;
+const apiKey=process.env.apiKey;
+const password=process.env.password;
 
-exports.getOrdersByPhoneNumber = async (req, res) => {
-  const { phone_number } = req.query;
+router.get('/', async (req, res) => {
+  const { phoneNumber } = req.query;
+
+  if (!phoneNumber || phoneNumber.length!==10) {
+    logger.error('Phone number is required or not valid phone number');
+    return res.status(400).json({ error: 'Phone number is required or not valid phone number' });
+  }
 
   try {
-    const customerOrders = await Order.find({ phone_number }).populate('customerId');
-    res.json(customerOrders);
-  } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
+    const shopify = new Shopify({
+      shopName: Name,
+      apiKey: key,
+      password: passKey,
+    });
+    const searchResult = await shopify.customer.search({ query: phoneNumber });
+
+    if (searchResult.length === 0) {
+      logger.error('Phone number not found');
+      return res.status(404).json({ error: 'Coustomer`s phone number doesnt exist' });
+    }
+
+    const orders = await shopify.order.list({ customer_id: searchResult[0].id });
+    if (orders.length === 0) {
+      logger.info(`Unable to fetch orders for phone number: ${phoneNumber}`);
+      return res.status(404).json({ error: "Orders not found" })
+    }
+
+    logger.info(`Fetched orders for phone number: ${phoneNumber}`);
+    res.json(orders);
+  } catch (error) {
+    logger.error(`Error occurred in fetching orders: ${error.message}`);
+    console.error('Error occurred in fetching orders:', error);
+    res.status(error.statusCode || 500).json({ error: error.message });
   }
-};
+});
+
+module.exports = router;

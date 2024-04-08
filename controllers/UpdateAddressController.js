@@ -1,14 +1,55 @@
-// app/controllers/UpdateAddressController.js
+const express = require('express');
+const router = express.Router();
+const Shopify = require('shopify-api-node');
+const logger = require('../logger');
+require('dotenv').config();
 
-const Address = require('../models/Address');
 
-exports.updateAddress = async (req, res) => {
-  const { address_id, address_data } = req.body;
 
+const shopName=process.env.shopName;
+const apiKey=process.env.apiKey;
+const password=process.env.password;
+
+router.put('/', async (req, res) => {
   try {
-    const updatedAddress = await Address.findByIdAndUpdate(address_id, address_data, { new: true });
+    console.log(req.body);
+    const { addressId, addressData } = req.body;
+
+    if (!addressId || !addressData) {
+      logger.error('Missing required fields');
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    addressData.default = true
+
+    const shopify = new Shopify({
+      shopName: Name,
+      apiKey: key,
+      password: passKey,
+    });
+    const searchResult = await shopify.customer.list();
+ const customerId = findCustomerIdByAddressId(addressId, searchResult)
+    if (!customerId) {
+      logger.error(`Error occurred in updating address: this addressId does not exist`);
+      res.status(404).json({ error: "This addressId does not exist" });
+    }
+    const updatedAddress = await shopify.customerAddress.update(customerId, addressId, addressData);
+
+    logger.info(`Address updated successfully for customerId: ${customerId}, addressId: ${addressId}`);
     res.json(updatedAddress);
-  } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
+  } catch (error) {
+    logger.error(`Error : ${error.message}`);
+    console.error('Error :', error);
+    res.status(500).json({ error: error.message });
   }
-};
+});
+function findCustomerIdByAddressId(addressId, customerData) {
+  for (const customer of customerData) {
+    for (const address of customer.addresses) {
+      if (address.id === addressId) {
+        return customer.id;
+      }
+    }
+  }
+  return null;
+}
+module.exports = router;

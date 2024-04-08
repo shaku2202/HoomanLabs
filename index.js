@@ -1,13 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const addressRoutes = require('./routes/addressRoutes');
 const updateAddressRoutes = require('./routes/updateAddressRoutes');
 const ordersRoutes = require('./routes/ordersRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const errorHandler = require('./middleware/errorHandler');
-// const odeerP=require('./routes/OrdersP');
-// const customerRoutes = require('./routes/customerRoutes');
+const logger = require('./logger');
 const cancelOrderRoutes = require('./routes/cancelOrderRoutes');
 const Shopify = require('shopify-api-node');
 const dotenv = require('dotenv'); 
@@ -16,19 +14,21 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-const shopify = new Shopify({
-  shopName:process.env.shopName, 
-  apiKey:process.env.apiKey, 
-  password:process.env.password, 
-});
+// const shopify = new Shopify({
+//   shopName:process.env.shopName, 
+//   apiKey:process.env.apiKey, 
+//   password:process.env.password, 
+// });
 
 
 app.get("/",(req,res)=>{
   res.send('Hello Shashank')
 })
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Error handling middleware
 app.use(errorHandler);
@@ -41,13 +41,6 @@ app.use('/app/api/orders', ordersRoutes);
 app.use('/app/api/order', orderRoutes);
 app.use('/app/api/order/cancel', cancelOrderRoutes);
 
-
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
 
 
 // Start server
