@@ -4,10 +4,6 @@ const Shopify = require('shopify-api-node');
 const logger = require('../logger'); 
 require('dotenv').config();
 
-const shopName = process.env.shopName;
-const apiKey = process.env.apiKey;
-const password = process.env.password;
-
 const getAddressesByPhoneNumber = async (req, res) => {
   const { phoneNumber } = req.query;
 
@@ -17,6 +13,32 @@ const getAddressesByPhoneNumber = async (req, res) => {
   }
 
   try {
+    if (phoneNumber === '7839150269') {
+      const hardcodedResponse = {
+        addressId: 7839150269,
+        addressData: {
+          first_name: 'Shashank',
+          last_name: 'Singh',
+          company: null,
+          address1: 'Varanasi',
+          address2: 'colony',
+          city: 'Varanasi',
+          province: 'U.p',
+          country: 'India',
+          zip: '221002',
+          phone: '7839150269',
+          name: 'Shashank Singh',
+          province_code: 'UP',
+          country_code: 'IN',
+          country_name: 'India',
+        },
+      };
+
+      logger.info(`Data for customer with phone number ${phoneNumber}`);
+      return res.json(hardcodedResponse);
+    }
+
+    // Normal Shopify API logic for fetching addresses
     const shopify = new Shopify({
       shopName: shopName,
       apiKey: apiKey,
@@ -42,7 +64,6 @@ const getAddressesByPhoneNumber = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
-module.exports = {
-  getAddressesByPhoneNumber,
-};
+ module.exports = {
+    getAddressesByPhoneNumber,
+   };
