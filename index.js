@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Error handling middleware
-app.use(errorHandler);
+// app.use(errorHandler);
 
 
 // Routes
