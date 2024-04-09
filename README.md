@@ -79,12 +79,69 @@ HoomansLabs/
 
 ## API Endpoints
 
-- **GET `/app/api/addresses`:** Retrieves list of saved addresses.
-- **PUT `/app/api/address/update`:** Updates customer address.
-- **GET `/app/api/orders`:** Gets order list.
-- **GET `/app/api/order`:** Gets order details.
-- **POST `/app/api/order/cancel`:** Cancels order.
+### 1. Retrieve Customer Addresses by Phone Number
 
+- **Endpoint**: `: https://hoomanlabs-1.onrender.com/app/api/addresses?phoneNumber=`
+- **Method**: `GET`
+- **Description**: Retrieves addresses for a customer based on their phone number.
+- **Required Parameters**:
+  - `phoneNumber`: Phone number of the customer.
+- **Sample Response**:
+  ```json
+  [
+    {
+      "address": "h-168",
+      "city": "India",
+      "zipcode": "10001"
+    },
+    {
+      "address": "54-kl4",
+      "city": "India",
+      "zipcode": "90001"
+    }
+  ]
+  ```
+
+
+### 2. Update Customer Address
+
+- **Endpoint**: `https://hoomanlabs-1.onrender.com./app/api/address/update/`
+- **Method**: `PUT`
+- **Description**: Updates a customer's address.
+- **Required Parameters**:
+  - `addressId`: ID of the address to be updated.
+  - `addressData`: New address data.
+- **Sample Request**:
+  Content-Type: application/json
+
+
+### 3. Retrieve Orders by Customer Phone Number
+
+- **Endpoint**: `https://hoomanlabs-1.onrender.com/app/api/orders?phoneNumber=`
+- **Method**: `GET`
+- **Description**: Retrieves orders associated with a customer's phone number.
+- **Required Parameters**:
+  - `phoneNumber`: Phone number of the customer.
+
+### 4. Retrieve Order Details by Order Number
+
+- **Endpoint**: `https://hoomanlabs-1.onrender.com/app/api/order`
+- **Method**: `GET`
+- **Description**: Retrieves details of an order based on its order number.
+- **Required Parameters**:
+  - `orderNumber`: Order number of the order to retrieve details.
+- **Sample Request**:
+  ```http
+  GET /orders?orderNumber=54856934554
+  ```
+
+### 5. Cancel an Order
+
+- **Endpoint**: `https://hoomanlabs-1.onrender.com/app/api/order/cancel/`
+- **Method**: `POST`
+- **Description**: Cancels an order based on its order number.
+- **Required Parameters**:
+  - `orderNumber`: Order number of the order to be cancelled.
 
 ## Dependencies
 
