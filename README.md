@@ -86,6 +86,10 @@ HoomansLabs/
 - **Description**: Retrieves addresses for a customer based on their phone number.
 - **Required Parameters**:
   - `phoneNumber`: Phone number of the customer.
+- - **Sample Request**:
+  ```http
+  GET  https://hoomanlabs-1.onrender.com/app/api/addresses?phoneNumber=7839150269
+  ```
 - **Sample Response**:
   ```json
   [
