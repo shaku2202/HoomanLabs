@@ -157,5 +157,5 @@ HoomansLabs/
 
 
 ![video1385639496 (online-video-cutter com)](https://github.com/shaku2202/HoomanLabs/assets/147685559/24a7e61d-f790-4ccf-9a9b-9a6fd8af7240)
-[Watch the Video](https://www.youtube.com/watch?v=RGJQ1cKWHcQ)
+[Watch the Full Video](https://www.youtube.com/watch?v=RGJQ1cKWHcQ)
 
