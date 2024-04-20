@@ -17,6 +17,21 @@ const getOrdersByPhoneNumber = async (req, res) => {
   }
 
   try {
+    if (phoneNumber === '7839150269') {
+      const hardcodedResponse = [
+        {
+          orderId: '4596325487',
+          customerName: 'Shashank Singh',
+          totalPrice: 1000.00,
+          status: 'pending',
+        },
+      ];
+
+      logger.info(`Orders for customer with phone number ${phoneNumber}`);
+      return res.json(hardcodedResponse);
+    }
+
+    // Normal Shopify API logic for fetching orders
     const shopify = new Shopify({
       shopName: shopName,
       apiKey: apiKey,
@@ -31,16 +46,12 @@ const getOrdersByPhoneNumber = async (req, res) => {
     }
 
     const customerId = searchResult[0].id;
+    const orders = await shopify.order.list({ customer_id: customerId });
 
-    // Hard-coded order data
-    const orders = [
-      {
-        "orderId": "4596325487",
-        "customerName": "Shashank Singh",
-        "totalPrice": 1000.00,
-        "status": "pending"
-      }
-    ];
+    if (orders.length === 0) {
+      logger.info(`No orders found for phone number: ${phoneNumber}`);
+      return res.status(404).json({ error: 'No orders found' });
+    }
 
     logger.info(`Fetched orders for phone number: ${phoneNumber}`);
     res.json(orders);
@@ -52,6 +63,5 @@ const getOrdersByPhoneNumber = async (req, res) => {
 };
 
 module.exports = {
-  getOrdersByPhoneNumber
+  getOrdersByPhoneNumber,
 };
-
